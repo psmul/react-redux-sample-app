@@ -1,0 +1,30 @@
+
+.UserList-table {
+  border-collapse: collapse;
+  width: 50vw;
+  text-align: left;
+  margin: 0 auto;
+
+  thead > tr {
+    height: 3rem;
+    background-color: #282c34;
+    color: white;
+  }
+
+  thead > tr th, tbody tr td {
+    padding: 5px 10px;
+  }
+
+  thead > tr th:last-child, tbody tr td:last-child {
+    text-align: right;
+  }
+
+  tbody tr {
+    cursor: pointer;
+    text-transform: capitalize;
+
+    &:hover {
+      background-color: aliceblue;
+    }
+  }
+}
