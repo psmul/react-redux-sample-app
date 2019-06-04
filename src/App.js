@@ -10,7 +10,7 @@ function App() {
       <header className="App-header">
         <h3>Welcome to React + Redux sample app created by Patryk Smul and powered by coffee</h3>
       </header>
-      <br/>
+      <br />
       <UserList />
     </div>
   );

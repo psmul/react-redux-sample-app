@@ -5,8 +5,10 @@ import UserModel from '../models/UserModel';
 
 export class UserService {
 
+  resource = '/users';
+
   fetchUsersFromLocalApi() {
-    return BaseService.get(config.API.LOCAL + '/users').then(data => data.data);
+    return BaseService.get(config.API.LOCAL + this.resource).then(data => data.data);
   }
 
   fetchUsersFromExternalApi(resultsCount) {
@@ -14,6 +16,18 @@ export class UserService {
     return BaseService.get(config.API.EXTERNAL + `?results=${resultsQuery}&inc=name,email,login,picture`).then((data) => {
       return plainToClass(UserModel, data.data.results);
     });
+  }
+
+  createUser(user) {
+    return BaseService.post(config.API.LOCAL + this.resource, user);
+  }
+
+  updateUser(user) {
+    return BaseService.put(config.API.LOCAL + `${this.resource}/${user.id}`, user);
+  }
+
+  deleteUser(user) {
+    return BaseService.delete(config.API.LOCAL + `${this.resource}/${user.id}`);
   }
 
 

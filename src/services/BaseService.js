@@ -13,7 +13,7 @@ baseService.interceptors.request.use((axiosConfig) => {
 baseService.interceptors.response.use(
   (response) => response,
   (error) => {
-    if(error.response.status > 400) {
+    if(error.response && error.response.status > 400) {
       console.warn(error.message);
     }
   }

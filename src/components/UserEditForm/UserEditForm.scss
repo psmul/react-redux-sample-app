@@ -1,0 +1,13 @@
+.UserEditForm {
+  min-width: 500px;
+
+
+  input[type="text"] {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+    height: 30px;
+    font-size: 18px;
+  }
+}
