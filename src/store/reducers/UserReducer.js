@@ -1,4 +1,4 @@
-import {DELETE_USER, FETCH_USERS} from '../actions/UserActionTypes'
+import {DELETE_LOCAL_USER, DELETE_USER, FETCH_USERS} from '../actions/UserActionTypes'
 
 const initialState = {
   users: []
@@ -15,7 +15,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         users: state.users.filter((user) => {
-          return user.login.uuid !== action.payload
+          return user.id !== action.payload
+        })
+      };
+    case DELETE_LOCAL_USER:
+      return {
+        ...state,
+        users: state.users.filter((user) => {
+          return user.uuid !== action.payload
         })
       };
     default:

@@ -18,16 +18,16 @@ class UserEditForm extends Component {
   }
 
   handleFirstNameChange(event) {
-    this.changeSpecifiedNameField('first', event.target.value)
+    this.changeSpecifiedNameField('firstName', event.target.value)
   }
 
   handleLastNameChange(event) {
-    this.changeSpecifiedNameField('last', event.target.value)
+    this.changeSpecifiedNameField('lastName', event.target.value)
   }
 
   changeSpecifiedNameField(field, value) {
     const user = this.state.user;
-    user.name[field] = value;
+    user[field] = value;
     this.setState({ user });
   }
 
@@ -58,12 +58,12 @@ class UserEditForm extends Component {
         <form onSubmit={this.handleSubmit}>
         <div className="UserEditForm-header">Edit selected user data</div>
         <hr/>
-        <img src={this.props.user.picture.large} alt=""/>
+        <img src={this.props.user.pictureUrl} alt=""/>
           <div>
-            <input type="text" name="firstName" value={this.state.user.name.first} onChange={this.handleFirstNameChange} />
+            <input type="text" name="firstName" value={this.state.user.firstName} onChange={this.handleFirstNameChange} />
           </div>
           <div>
-            <input type="text" name="lastName" value={this.state.user.name.last} onChange={this.handleLastNameChange} />
+            <input type="text" name="lastName" value={this.state.user.lastName} onChange={this.handleLastNameChange} />
           </div>
         <hr/>
         <button onClick={this.onCancel}>Cancel</button>

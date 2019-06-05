@@ -8,13 +8,22 @@ export class UserService {
   resource = '/users';
 
   fetchUsersFromLocalApi() {
-    return BaseService.get(config.API.LOCAL + this.resource).then(data => data.data);
+    return BaseService.get(config.API.LOCAL + this.resource).then(data => plainToClass(UserModel, data.data));
   }
 
   fetchUsersFromExternalApi(resultsCount) {
     const resultsQuery = resultsCount || 10;
     return BaseService.get(config.API.EXTERNAL + `?results=${resultsQuery}&inc=name,email,login,picture`).then((data) => {
-      return plainToClass(UserModel, data.data.results);
+      return data.data.results.map((entity, idx) => {
+        return plainToClass(UserModel, {
+          id: entity.id,
+          firstName: entity.name.first,
+          lastName: entity.name.last,
+          email: entity.email,
+          uuid: entity.login.uuid,
+          pictureUrl: entity.picture.thumbnail
+        });
+      })
     });
   }
 

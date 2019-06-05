@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './UserList.scss';
 import { connect } from "react-redux";
-import { fetchUsersFromLocalApi, deleteUser } from '../../store/actions/UserActions';
+import { fetchUsersFromLocalApi, deleteUser, deleteLocalUser } from '../../store/actions/UserActions';
 import Modal from 'react-modal';
 import UserEditForm from '../UserEditForm/UserEditForm';
 
@@ -43,9 +43,13 @@ class UserList extends Component {
   }
 
   deleteSelectedUser(user) {
-    const deleteConfirmation = window.confirm(`Please confirm deleting user: ${user.name.first} ${user.name.last}`);
+    const deleteConfirmation = window.confirm(`Please confirm deleting user: ${user.getFullName()}`);
     if(deleteConfirmation) {
-      this.props.deleteUser(user);
+      if(user.id) {
+        this.props.deleteUser(user);
+      } else {
+        this.props.deleteLocalUser(user);
+      }
     }
   }
 
@@ -83,12 +87,12 @@ class UserList extends Component {
           <tbody>
             {this.props.users.map(user => {
               return (
-                <tr key={user.name.first + '_' + user.name.last}>
+                <tr key={user.getFullName()}>
                   <td>
-                    <img src={user.picture.thumbnail} alt=""/>
+                    <img src={user.pictureUrl} alt=""/>
                   </td>
-                  <td>{user.name.first}</td>
-                  <td>{user.name.last}</td>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
                   <td>
                     <button onClick={this.editUserData.bind(this, user)}>Edit</button>
                     <button onClick={this.deleteSelectedUser.bind(this, user)}>Delete</button>
@@ -111,6 +115,6 @@ const mapStateToProps = state => {
   return state.users;
 };
 
-const mapDispatchToProps = { fetchUsersFromLocalApi, deleteUser };
+const mapDispatchToProps = { fetchUsersFromLocalApi, deleteUser, deleteLocalUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList);
