@@ -59,15 +59,11 @@ class UserEditForm extends Component {
         <div className="UserEditForm-header">Edit selected user data</div>
         <hr/>
         <img src={this.props.user.pictureUrl} alt=""/>
-          <div>
-            <input type="text" name="firstName" value={this.state.user.firstName} onChange={this.handleFirstNameChange} />
-          </div>
-          <div>
-            <input type="text" name="lastName" value={this.state.user.lastName} onChange={this.handleLastNameChange} />
-          </div>
+        <input type="text" name="firstName" value={this.state.user.firstName} onChange={this.handleFirstNameChange} />
+        <input type="text" name="lastName" value={this.state.user.lastName} onChange={this.handleLastNameChange} />
         <hr/>
-        <button onClick={this.onCancel}>Cancel</button>
-        <input type="submit" value="Save" />
+        <button className="action-button" onClick={this.onCancel}>Cancel</button>
+        <input type="submit" value="Save" className="action-button" />
         </form>
       </div>
     );

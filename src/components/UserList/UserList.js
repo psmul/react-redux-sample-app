@@ -94,8 +94,8 @@ class UserList extends Component {
                   <td>{user.firstName}</td>
                   <td>{user.lastName}</td>
                   <td>
-                    <button onClick={this.editUserData.bind(this, user)}>Edit</button>
-                    <button onClick={this.deleteSelectedUser.bind(this, user)}>Delete</button>
+                    <button className="action-button" onClick={this.editUserData.bind(this, user)}>Edit</button>
+                    <button className="action-button" onClick={this.deleteSelectedUser.bind(this, user)}>Delete</button>
                   </td>
                 </tr>
               )
