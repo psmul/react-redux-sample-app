@@ -8,7 +8,8 @@ export const fetchUsersFromLocalApi = (resultCount) => dispatch => {
         type: FETCH_USERS,
         payload: data
       })
-    } else {
+    }
+    else {
       fetchUsersFromExternalApi(resultCount)(dispatch);
     }
   })
