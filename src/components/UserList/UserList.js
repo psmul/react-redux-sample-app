@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './UserList.scss';
 import { connect } from "react-redux";
-import { fetchUsersFromLocalApi, deleteUser, deleteLocalUser } from '../../store/actions/UserActions';
+import { fetchUsersFromLocalApi, deleteUser } from '../../store/actions/UserActions';
 import Modal from 'react-modal';
 import UserEditForm from '../UserEditForm/UserEditForm';
 
@@ -45,11 +45,7 @@ class UserList extends Component {
   deleteSelectedUser(user) {
     const deleteConfirmation = window.confirm(`Please confirm deleting user: ${user.getFullName()}`);
     if(deleteConfirmation) {
-      if(user.id) {
-        this.props.deleteUser(user);
-      } else {
-        this.props.deleteLocalUser(user);
-      }
+      this.props.deleteUser(user);
     }
   }
 
@@ -115,6 +111,6 @@ const mapStateToProps = state => {
   return state.users;
 };
 
-const mapDispatchToProps = { fetchUsersFromLocalApi, deleteUser, deleteLocalUser };
+const mapDispatchToProps = { fetchUsersFromLocalApi, deleteUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList);

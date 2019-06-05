@@ -1,4 +1,4 @@
-import {DELETE_LOCAL_USER, DELETE_USER, FETCH_USERS} from './UserActionTypes';
+import {FETCH_USERS} from './UserActionTypes';
 import UserService from '../../services/UserService';
 
 export const fetchUsersFromLocalApi = (resultCount) => dispatch => {
@@ -26,16 +26,6 @@ export const fetchUsersFromExternalApi = (resultCount) => dispatch => {
 
 export const deleteUser = (user) => dispatch => {
   UserService.deleteUser(user).then((data) => {
-    dispatch({
-      type: DELETE_USER,
-      payload: user.id
-    })
+    fetchUsersFromLocalApi()(dispatch);
   })
-};
-
-export const deleteLocalUser = (user) => dispatch => {
-    dispatch({
-      type: DELETE_LOCAL_USER,
-      payload: user.uuid
-    })
 };
